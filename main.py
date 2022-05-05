@@ -23,6 +23,7 @@ PTR_DECREMENT = '\tDEC rsi\n'
 INCREMENT = '\tINC byte [rsi]\n'
 DECREMENT = '\tDEC byte [rsi]\n'
 PUTCHAR = '\tCALL putchar\n'
+GETCHAR = '\tCALL getchar\n'
 LOOP_START = '''\n\tMOV al, [rsi]
 \tTEST rax, rax
 \tJZ end_loop_{0}
@@ -59,6 +60,8 @@ class Translator:
                     self._add_asm_opcode(DECREMENT)
                 case '.':
                     self._add_asm_opcode(PUTCHAR)
+                case ',':
+                    self._add_asm_opcode(GETCHAR)
                 case '[':
                     self.loop_index += 1
                     self.loop_stack.append(self.loop_index)

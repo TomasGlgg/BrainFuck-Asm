@@ -7,6 +7,7 @@ section .text
 _start:
     MOV rbp, rsp
     MOV rsi, buffer
+    MOV rdx, 1   ; message length (getchar, putchar)
 
 {CODE}
     MOV rax, 60  ; exit
@@ -15,6 +16,11 @@ _start:
 putchar:
     MOV rax, 1   ; syscall number
     MOV rdi, 1   ; fd
-    MOV rdx, 1   ; message length
+    syscall
+    RET
+
+getchar:
+    XOR rax, rax ; syscall number
+    XOR rdi, rdi ; fd
     syscall
     RET
