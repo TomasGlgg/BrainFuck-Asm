@@ -23,13 +23,13 @@ PTR_DECREMENT = '\tDEC rsi\n'
 INCREMENT = '\tINC byte [rsi]\n'
 DECREMENT = '\tDEC byte [rsi]\n'
 PUTCHAR = '\tCALL putchar\n'
-LOOP_START = '''\n\tmov al, [rsi]
-\ttest rax, rax
-\tjz end_loop_{0}
+LOOP_START = '''\n\tMOV al, [rsi]
+\tTEST rax, rax
+\tJZ end_loop_{0}
 start_loop_{0}:\n'''
-LOOP_END = '''\n\tmov al, [rsi]
-\ttest rax, rax
-\tjnz start_loop_{0}
+LOOP_END = '''\n\tMOV al, [rsi]
+\tTEST rax, rax
+\tJNZ start_loop_{0}
 end_loop_{0}:\n'''
 
 

@@ -17,4 +17,4 @@ putchar:
     MOV rdi, 1   ; fd
     MOV rdx, 1   ; message length
     syscall
-    ret
+    RET
