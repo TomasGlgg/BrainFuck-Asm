@@ -4,7 +4,6 @@ import argparse
 import pathlib
 
 
-MEMORY_SIZE = 0x1000
 TEMPLATE_FILENAME = 'template.asm'
 
 
@@ -40,6 +39,7 @@ class Translator:
     template = str()
     loop_index = -1
     loop_stack = list()
+    memory_size = '30000'
 
     def load_bf_code(self, bf_fd):
         self.bf_code = bf_fd.read().strip()
@@ -76,7 +76,7 @@ class Translator:
 
     def save(self, fd):
         result = self.template.format(
-            MEMORY_SIZE=hex(MEMORY_SIZE),
+            MEMORY_SIZE=self.memory_size,
             CODE=self.asm_code
         )
         fd.write(result)
@@ -104,9 +104,15 @@ if __name__ == '__main__':
                         type=pathlib.Path,
                         help='Compile asm (required nasm)'
                         )
+    parser.add_argument('-s', '--memory-size',
+                        dest='size',
+                        type=str,
+                        default='30000',
+                        help='Size of memory (default 30000)')
     args = parser.parse_args()
 
     translator = Translator()
+    translator.memory_size = args.size
     translator.load_bf_code(args.brainfuck_input)
     translator.translate()
     translator.load_template()
