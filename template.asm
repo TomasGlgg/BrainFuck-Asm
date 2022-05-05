@@ -6,7 +6,7 @@ buffer: resb {MEMORY_SIZE}
 section .text
 _start:
     MOV rbp, rsp
-    MOV rsi, {MEMORY_START_ADDRESS}
+    MOV rsi, buffer
 
 {CODE}
     MOV rax, 60  ; exit

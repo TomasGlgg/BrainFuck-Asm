@@ -4,7 +4,6 @@ import argparse
 import pathlib
 
 
-MEMORY_START_ADDRESS = 0x402000
 MEMORY_SIZE = 0x1000
 TEMPLATE_FILENAME = 'template.asm'
 
@@ -75,7 +74,6 @@ class Translator:
     def save(self, fd):
         result = self.template.format(
             MEMORY_SIZE=hex(MEMORY_SIZE),
-            MEMORY_START_ADDRESS=hex(MEMORY_START_ADDRESS),
             CODE=self.asm_code
         )
         fd.write(result)
